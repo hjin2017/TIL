@@ -8,3 +8,5 @@
 * git log 로그
 * git commit -m '코멘트' 사이트 올리기전에 대기상태
 * git push origin master 깃 사이트에 올리기
+* 로그인 후 아이디 계정 아이디 물어봄
+* 다시 비번 입력
