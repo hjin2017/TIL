@@ -10,3 +10,21 @@
 * git push origin master 깃 사이트에 올리기
 * 로그인 후 아이디 계정 아이디 물어봄
 * 다시 비번 입력
+
+# gitignore
+
+* .gitignore 파일 사용금지에 사용
+
+* 메모장 사용x
+
+  ```c++
+      data.csv
+      secret_forder/
+      .zip
+      등으로 명시하면 잠김
+          /는 줄바꿈 c++과 동일한듯
+  ```
+
+  * http://gitignore.io/ <-사이트
+
+    <b/>
