@@ -1,3 +1,9 @@
+
+
+
+
+
+
 # java 정리
 
 ## day1
@@ -195,8 +201,8 @@
 
 * ```java
   		for(String sd : map.keySet())
-  			for(String ss: map.get(sd))
-  				System.out.println(ss);
+    			for(String ss: map.get(sd))
+    				System.out.println(ss);
   ```
 
 # Generic
@@ -241,5 +247,88 @@ class BoxManager{
 class Box<T extends Fruit>{
   
     public void test(Box<? extends Fruit> b){
+```
+
+# day8
+
+#  Innerclass
+
+``` java
+class Outer2{
+    final int outervar =10;
+	final static int outervar2 =20;
+    static class Inner{
+        class Inner2{
+//클레스안에 클레스를 생성 기능 
+//스텍틱은 스텍틱 변수만 사용
+//이너클레스에서 사용되면 자동으로 파이널 형성됨 명시적으로 붙여야 좋다
+```
+
+``` java
+	new A("s") {
+					void ma() {	
+						System.out.println("A");
+					}
+						
+					}.ma();
+```
+
+
+
+```java
+abstract class A{
+	String s;
+	A(String s){
+		this.s =s;
+		System.out.println(s);
+	}
+	abstract void ma();
+	public void mb() {System.out.println("B");}
+}
+
+interface MyInter{
+	void mi1();
+	void mi2();
+}
+인터페이스를 1회용으로 사용 가능
+```
+
+# 람다
+
+``` java
+@FunctionalInterface
+interface  As<T,T2,T3>{
+	 T3 calc(T f,T2 s);
+}
+//함수는 1만 존제
+```
+
+```java
+//()->{};
+As<String,Integer,String> m = (x, y)->{
+	String name ="s";
+	return x + y+name;
+};
+```
+
+```java
+System.out.println(m.calc("d",1));
+```
+
+``` java
+As<Integer,Integer,Integer> m3 =C::mc1;
+As<Integer,Integer,Integer> m3 =new C::mc1;
+//다른 함수를 불러서 사용가능
+```
+
+# 입출력
+
+``` java
+Scanner key = new Scanner(System.in);
+		String word="" ;
+	
+	while(!word.equals("끝")) {
+		 word = key.nextLine();
+		 System.out.println(word);}
 ```
 
