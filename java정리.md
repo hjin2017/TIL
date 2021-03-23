@@ -318,6 +318,8 @@ System.out.println(m.calc("d",1));
 ``` java
 As<Integer,Integer,Integer> m3 =C::mc1;
 As<Integer,Integer,Integer> m3 =new C::mc1;
+//함수가 스텍틱 이여야 함
+//NON 스텟틱이면 ()->함수 형임
 //다른 함수를 불러서 사용가능
 ```
 
@@ -332,3 +334,29 @@ Scanner key = new Scanner(System.in);
 		 System.out.println(word);}
 ```
 
+# Day9
+```java
+public static void main(String[] args) {
+	FileReader fi = null; 
+	FileWriter fo = null;
+	try {
+		fi = new FileReader(args[0]);
+		fo = new FileWriter(args[1],true);
+		while(true) {
+			int result = fi.read();
+			if(result== (int)(''))continue;
+			fo.write(result);
+			if(result == -1) {break;}
+		}
+	} catch (IOException e) {
+		e.printStackTrace();
+	} finally {
+		try {
+			fi.close();
+			fo.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+}
+```
