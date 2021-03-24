@@ -360,3 +360,81 @@ public static void main(String[] args) {
 	}
 }
 ```
+
+# day10
+
+* 클라이언트
+
+```java
+public static void main(String[] args) {
+		try {
+			Socket s = new Socket("192.168.200.163",9999);
+		System.out.println("서버연결중");
+		
+		OutputStream os =s.getOutputStream();
+		DataOutputStream dos =new DataOutputStream(os);
+		String data = "hello server";
+		dos.writeUTF(data);
+	
+		InputStream i = s.getInputStream();
+		DataInputStream dis = new DataInputStream(i);
+		String input_b = dis.readUTF();
+		System.out.println("+클라+"+ input_b+" |");
+		
+		s.close();
+		System.out.println("서버와 연결종료");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+```
+
+* 서버 
+
+```java
+public static void main(String[] args) {
+		//0~1024 사용 하지말자
+		//1025 - 5000 피하쟈
+		String ids[] = {"java","jsp","spring"};
+		try {
+			ServerSocket ss = new ServerSocket(9999);
+			System.out.println("+++++++서버대기중++++++");
+			while(true) {
+				
+				Socket s = ss.accept();
+				System.out.println("+++++++클라연결중++++++");
+
+				InputStream i = s.getInputStream();
+				DataInputStream dis = new DataInputStream(i);
+				String input_b = dis.readUTF();
+				
+				String data = "hello client";
+				for(String str :ids)
+				{
+					if(str.equals(input_b))
+					{
+						data="불가능";
+						break;
+					}
+					else data="가능" ;
+				}
+				
+				
+				OutputStream os =s.getOutputStream();
+				DataOutputStream dos = new DataOutputStream(os);
+				dos.writeUTF(data);
+				
+				s.close();
+				System.out.println("+++++++클라종료중++++++");
+			}
+		} catch (IOException e) {e.printStackTrace();}
+
+	}
+```
+
+* 패턴 
+* 싱글톤 으로 게이트 열어서
+* 여러 클레스들의 독립 생태계를 만들어 주고
+* 기능별로 다시 묶어서 
+* 관리를 한다
