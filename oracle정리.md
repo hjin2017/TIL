@@ -102,7 +102,7 @@ REGIONS          	TABLE
    ```
 
 3. 직원 중에서 상관이 없는 직원의 이름과 급여를 조회하시오.
-  상관의 정보는 manager_id 컬럼에 있습니다.
+    상관의 정보는 manager_id 컬럼에 있습니다.
 
   ``` c
   select first_name,salary  from employees where manager_id  is null ;
@@ -115,8 +115,8 @@ REGIONS          	TABLE
    ```
 
 5. 직종이 clerk 직종인 직원의 이름, 급여, 직종코드를 조회하시오.
-  (clerk 직종은 job_id에 CLERK을 포함하거나
-  CLERK으로 끝난다.)
+    (clerk 직종은 job_id에 CLERK을 포함하거나
+    CLERK으로 끝난다.)
 
   ``` c
   select first_name, salary,job_id from employees where job_id like '%CLERK%';
@@ -141,7 +141,7 @@ REGIONS          	TABLE
    ```
 
 9. 커미션을 받는 직원의 이름, 커미션, 총급여를 조회하시오.
-  총급여는 커미션*급여로 계산합니다 COMMISSION_PCT
+    총급여는 커미션*급여로 계산합니다 COMMISSION_PCT
 
   ```c
   select first_name,COMMISSION_PCT,SALARY,SALARY+SALARY*COMMISSION_PCT from employees where COMMISSION_PCT  is not null;
@@ -262,14 +262,11 @@ select country_id from countries where country_name='United Kingdom';
 | 형변 | CAST, TO_DATE,TOCAHR,TONUMBER                                |
 | ---- | ------------------------------------------------------------ |
 | 구룹 | SUM,AVG,MIN,MAX,                                             |
-| 문자 | CONCAT('A', '가'),\|\|문자 합체,INSTR(123,3) 인덱스 확인,initcap 초기값 lower,upper,LENGTHB(바이트),LENGTH(글자 수),replace / translate ('this is java','java','oracle')오라클로 변경해줌,substr(대상,4,2)='03' 문자열 자르기 4번째 부터 2개,ltrim 왼쪽 공백제거,rtrim 오른쪽 공백 제거(대상,#)#제거 |
+| 문자 | CONCAT('A', '가'),\|\|문자 합체,INSTR(123,3) 인덱스 확인,initcap 초기값 lower,upper,LENGTHB(바이트),LENGTH(글자 수),replace / translate ('this is java','java','oracle')오라클로 변경해줌,substr(대상,4,2)='03' 문자열 자르기 4번째 부터 2개,ltrim 왼쪽 공백제거,rtrim 오른쪽 공백 제거(대상,#)#제거,LPAD |
 | 숫자 | mod(3,3) == 3%3 round(대상,-10(정수)~10(소수))-반올림 trunc  반올림 x |
 | 날짜 | sysdate,systimestamp,add_months,months_between               |
 | 순위 | rownum 별도 row_number,rank,dense_rank //순위 함수()over(partition by 구룹 컴럼 order by 컬럼 desc) |
 | null | nvl(salary,0)                                                |
-| *    |                                                              |
-| *    |                                                              |
-| *    |                                                              |
 
 select rtrim(ltrim('$$a$$','$'),'$')from dual;
 
@@ -297,7 +294,7 @@ select first_name, salary,nvl(to_char(commission_pct),'읏자')as a1 from employ
 
 select first_name, salary,nvl(to_char(commission_pct),'읏자')"ㅁ ㅁ ㅁ" from employees;
 
-* ex 
+# ex
 
 1. 이름이 'adam' 인 직원의 급여와 입사일을 조회하시오.
 
@@ -315,13 +312,11 @@ select first_name, salary,nvl(to_char(commission_pct),'읏자')"ㅁ ㅁ ㅁ" fro
    ```
 
 3. 'Adam의 입사일은 05/11/2 이고, 급여는 7,000\ 입니다.' 의 형식으로 직원
-  정보를 조회하시오.
+    정보를 조회하시오.
 
   ```c
   select ((first_name||'의 입사일은 ')||(to_char(hire_date,'yy/mm/fmdd')||'이고, 급여는 ')||(to_char(salary,'99,999')||'\입니다'))"직원정보" from employees;
   ```
-
-  
 
 4. 이름이 5글자 이하인 직원들의 이름, 급여, 입사일을 조회하시오.
 
@@ -329,15 +324,11 @@ select first_name, salary,nvl(to_char(commission_pct),'읏자')"ㅁ ㅁ ㅁ" fro
   select first_name,salary,hire_date from employees where LENGTH(first_name)< all 5;
   ```
 
-  
-
 5. 06년도에 입사한 직원의 이름, 입사일을 조회하시오.
 
   ``` c
   select first_name,hire_date from employees where to_char(hire_date,'yy') ='06';
   ```
-
-  
 
 6.  10년 이상 장기 근속한 직원들의 이름, 입사일, 급여, 근무년차를 조회하시오.
 
@@ -345,36 +336,256 @@ select first_name, salary,nvl(to_char(commission_pct),'읏자')"ㅁ ㅁ ㅁ" fro
   select first_name,hire_date,salary,round((sysdate-hire_date)/365)as 년차  from employees;
   ```
 
-  
-
 7. employees 테이블에서 
-  직종이(job_id) 'st_clerk'인 사원 중에서 급여가 1500 이상인 사원의
-  first_name, job_id, salary 를 조회하시오. 단 이름은 모두 대문자로 출력하시오.
+    직종이(job_id) 'st_clerk'인 사원 중에서 급여가 1500 이상인 사원의
+    first_name, job_id, salary 를 조회하시오. 단 이름은 모두 대문자로 출력하시오.
 
   ``` c
   select upper(first_name),job_id,salary from employees where job_id = upper('st_clerk') and salary > all 1500;
   ```
 
 8. 급여합계가 20000 이상인 직종(job_id)의
-  job_id, 급여합계를 조회하시오.
-  단, 급여합계는 10자리로 출력하되 공백은 '0'으로 표시하시오. 으로 정정합니다.
+    job_id, 급여합계를 조회하시오.
+    단, 급여합계는 10자리로 출력하되 공백은 '0'으로 표시하시오. 으로 정정합니다.
 
   ```c
   select  job_id,LPAD(to_char(sum(salary)),10,'0')"합" from employees group by job_id having  sum(salary) >all 20000;
   ```
 
-  
-
 9. 직원의 이름, 급여, 직원의 관리자 사번을 조회하시오. 단, 관리자가 없는 직원은
-  '<관리자 없음>'이 출력되도록 합니다.
-  9번문제 관리자이름-->관리자사번 으로 정정합니다.
+    '<관리자 없음>'이 출력되도록 합니다.
+    9번문제 관리자이름-->관리자사번 으로 정정합니다.
 
   ``` c
   select first_name,salary,nvl(to_char(MANAGER_ID),'<관리자 없음>') from employees;
   ```
 
-  
+  # day3
 
-  
+* join
 
-  
+  1. select employee_id,first_name,employees.department_id,department_name from employees, departments where employees.department_id = departments .department_id;
+     * inner join
+  2. select employee_id,first_name, e.department_id,department_name from employees e , departments d where e.department_id = d.department_id;
+     * outer join // (+) 체우기
+  3. select employee_id,first_name, e.department_id,department_name from employees e , departments d where e.department_id = d.department_id(+);
+
+* ex  **inner join**
+
+  * select first_name ,department_name ,city from employees e, departments d, locations l where e.department_id = d.department_id and d.location_id = l.location_id and upper(city)= 'LONDON';
+  * select first_name ,department_name, city from employees e, departments d, locations l where e.department_id = d.department_id and d.location_id = l.location_id and department_name like '%IT%';
+
+* ex **outer join**
+
+  * select e.employee_id ,e.first_name , e.manager_id , m.employee_id, m.first_name from employees  e, employees  m where e.manager_id = m . employee_id(+) ;
+  * select e.manager_id, e.salary ,e.first_name ,m.salary, m.employee_id from employees  e, employees  m  where e.salary>=all m.salary  and e.manager_id = m . employee_id;
+
+* cross join 사용하면 안된다
+
+  |       | ansi 표준 문법                        |                      |
+  | ----- | ------------------------------------- | -------------------- |
+  | inner | form 테이블1 t1 inner 테이블2 t2      | on 대상1=대상2       |
+  | outer | form 테이블1 t1 left outer 테이블2 t2 | on 대상1=대상2       |
+  | self  | form 테이블1 t1 inner 테이블2 t2      | on t1.대상1=t2.대상2 |
+
+set pagesize 150;
+
+set linesize 150;
+
+* **union**  중복 제거// **union all** 중복 생존 위 조건과 아래 조건을 모두 포함 하는 것 **or**
+
+  > * select first_name,department_id,salary from employees where department_id =50 union all select first_name,department_id,salary from employees where salary <= all 5000 order by first_name ;
+
+* **minus**  위 조건을 포함하고 아래조건이 아닌것 **not**
+
+  > * select first_name,department_id,salary from employees where department_id =50 minus select first_name,department_id,salary from employees where salary <= all 5000 order by first_name ;
+
+* **intersect** 위 조건과 아래 조건을 포함 하는 것 **and**
+
+  > * select first_name,department_id,salary from employees where department_id =50 intersect select first_name,department_id,salary from employees where salary <= all 5000 order by first_name ;
+
+# DDL - 테이블 정의 / 변경 / 삭제
+
+* **CREATE TABLE** :테이블이름(컬럼명1 타입(길이) 제약조건, 컬럼면2 타입(길이) 제약조건......);
+
+* **ALTER TABLE **  
+
+  > ​		 			  :테이블 이름 (ADD 컬럼명1 타입(길이) 제약조건);			
+  >
+  > ​				   	:테이블 이름 (MODIFY 컬럼명1 타입(길이) 제약조건);
+  >
+  >  			          : 테이블 이름 (DROP COLUMN 컬럼명1 타입(길이) 제약조건);
+
+* **DROP TABLE** :테이블 이름
+
+- db 테이블 소유주 = schema = 사용자 = 계정
+
+  - 사용자 생성 권한 - systrm 계정
+
+  - conn system/system;
+
+  - create user 이름 identified by 암호
+
+  - create user jdbc identified by jdbc;
+
+  - grant resource , connect to jdbc;
+
+  - grant select on employees to jdbc;
+
+  - select * from hr.employees;
+
+  - conn jdbc/jdbc
+
+    ```c
+    /*db 테이블 소유주 = schema = 사용자 = 계정*/
+    SQL> conn system/system;
+    Connected.
+    SQL> create user jdbc identified by jdbc;
+    
+    User created.
+    //jdbc resource에 connect 
+    SQL> grant resource , connect to jdbc;
+    
+    Grant succeeded.
+    
+    SQL> conn jdbc/jdbc
+    Connected.
+    ```
+
+    
+
+* 테이블/컬럼  명명법 - java와 동일주석 -- 
+
+  | emp 테이블                            |
+  | ------------------------------------- |
+  | id 정수 5자리                         |
+  | name 문자열 20자리                    |
+  | title 문자열 20자리                   |
+  | salary 실수 정수 10 자리 소수점 2자리 |
+  | dept_id 정수 5자리                    |
+
+* TABLE
+
+  * 생성
+    * create table emp (id number(5), name varchar2(20),title varchar2(20),dept_id number(5), salary number(12,2));
+    * create table emp_copy as select *from employees;
+    * create sequence 이름(start with 10, increment by 5,maxvalue);
+  *  삭제 
+    * drop table  emp; 
+
+* COLUMN  
+
+  * 추가
+    * alter table emp add indate date;
+    * alter sequence 이름(start with 10, increment by 5,maxvalue);
+
+  * 변경
+    * alter table emp MODIFY name varchar2(20);
+  * 삭제
+    * alter table emp DROP COLUMN indate ;
+    * DROP  sequence 이름;
+
+# DML 
+
+* 정보 추가
+
+  * insert  테이블명(컬럼명) values (값.'''''''') 정보
+
+  * insert   select ~from ??;
+
+  * commit 추가
+
+    ```c
+    insert into emp values(100,'이사원','사원', 10,99000.5);
+    insert into emp values(200,'김대리',null, null,null);
+    insert into emp(id,name) values(300,'박과장');
+    insert into emp values(400,'최부장','부장', 20,99000.5);
+    insert into emp values(500,'박대리','대리', 20,99000.5);
+    ```
+
+* 정보 변경 
+
+  * update   테이블명 set  변경 컬럼 = value where 변경조건식
+
+  * update  emp set title = '대리' where id =200;
+
+    ```c
+    update  emp set salary=1000 where salary is null;
+    update emp set dept_id= (select dept_id from emp where title = '대리' )where name = '박대리';
+    ```
+
+* 정보 삭제
+
+  * delete 테이블명 where 삭제 조건
+
+  * delete 테이블명 데이터 삭제
+
+    ```c
+    delete emp where id =100;
+    ```
+
+  * commit  or rollback
+
+# TCL
+
+* commit; 데이터에 추가
+* rollback; commit전에  rollback
+* 시퀀스 졸음
+
+# 시퀀스
+
+* create sequence 시퀀스 이름 1부터 시작
+  * create swquence 시퀀스 이름 (start with 10, increment by5 maxvalue 100);
+  * 10에서 5씩 100까지
+* ex 
+  * 시퀀스이름.currval 10->10->10->10
+  * 시퀀스이름.nextval 10->15->20->25
+  * inert into values(emp_seq.nextval,이자바', '사원', 30, 45000.55);
+* 수정 삭제 
+  * alter sequence 시퀀스 이름 start with 10
+  * alter sequence 시퀀스 이름 increment by 5
+  * drop sequence 시퀀스 이름
+
+# 정보 제한
+
+create table테이블 ( 이름 number(5) constraint 이름_2 check 이프문);
+
+이름_2 에러에서 알려줌
+
+​                                                                 unique+null                   primary key 
+
+​																				널안되				not null
+
+​																						하나만					unique
+
+
+
+* ex 
+
+  * create table c_dept_id(dept_id number(5) constraint dept_id_pk primary key, dept_name varchar2(20) constraint dept_name_uk unique, city varchar2(20) constraint city_nn not null);
+
+  * create table c_emp( emp_id number(5) constraint c_emp_emp_id_pk primary key,  emp_name varchar2(20) constraint c_emp_name_nn not null, title varchar2(10) constraint c_emp_title_ck check (title in ('사원', '대리', '과장','부장','임원')), salary number(12, 2) constraint c_emp_salary_ck check(salary >= 1000), dept_id number(5) constraint c_emp_dept_id_fk references c_dept(dept_id) );
+
+  * insert into c_dept values(10, '인재개발부', '제주'); 
+  * insert into c_dept values(20, '교육부', '서울'); 
+  * insert into c_dept values(30, '전산개발부', '대전'); 
+  * commit;
+
+  * insert into c_emp values(200, '박대리','대리',1999,10);
+  *  insert into c_emp values(300, '안대리','대리',1999,20);
+  *  insert into c_emp values(400, '박과장','과장',3000,30);
+  *  insert into c_emp values(500, '박부장','부장',5000,10);
+  * commit;
+
+* 제거
+
+  * alter table c_emp rename 이전컬럼명 to 새컬럼명;
+  *  rename 이전테이블명 to 새로운테이블명; 
+  * 아이디입력 – xxxx (자바 + db 연동) --> db c_emp 저장(sql)--> db 전송-->오라클
+
+create table Student(No number(5) constraint No_pk_nn primary key,name varchar2(10),det varchar2(20),addr varchar2(80),tel varchar2(20));
+
+insert into Student values(1,'홍길동','국문학과' ,'서울','010-1111-1111');
+
+insert into Student values(2,'고길동','수학과' ,'인천','010-2222-2222');
+
