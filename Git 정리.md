@@ -2,6 +2,8 @@
 
 ## 명령문
 
+* git init
+* git remote add origin 주소
 * git status 상태
 * git add . 전부 추가
 * git init 파일기본 셋팅
