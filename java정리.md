@@ -195,6 +195,50 @@
   			System.out.println(integer);
   ```
 
+```java
+public static void main(String[] args) {
+		HashSet<Integer> ss = new HashSet();	// 1 2 3 4
+		HashSet<Integer> ss2 = new HashSet();	// 3 4 5 6
+		HashSet<Integer> ss3 = new HashSet();	// 1 2
+		
+		ss.add(1);
+		ss.add(2);
+		ss.add(3);
+		ss.add(4);
+		
+		ss2.add(3);
+		ss2.add(4);
+		ss2.add(5);
+		ss2.add(6);
+		
+		ss3.add(1);
+		ss3.add(2);
+		
+		/*
+		ss.addAll(ss2);	// (1 2 3 4) ∪ (3 4 5 6) = (1 2 3 4 5 6) 합집합
+		for(int n : ss) System.out.print(n + " ");
+		System.out.println();
+		*/
+		
+		/*
+		ss.retainAll(ss2);	// (1 2 3 4) ∩ (3 4 5 6) = (3 4) 교집합
+		for(int n : ss) System.out.print(n + " ");
+		System.out.println();
+		*/
+		
+		/*
+		ss.removeAll(ss2);	// (1 2 3 4) - (3 4 5 6) = (1 2) 차집합
+		for(int n : ss) System.out.print(n + " ");
+		System.out.println();
+		*/
+		
+		/*
+		System.out.println(ss.containsAll(ss2));	// (1 2 3 4) ≠ (3 4 5 6)
+		System.out.println(ss.containsAll(ss3));	// (1 2 3 4) ⊃ (1 2)
+		*/
+	}
+```
+
 # map
 
 * 740p

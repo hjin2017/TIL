@@ -262,7 +262,7 @@ select country_id from countries where country_name='United Kingdom';
 | 형변 | CAST, TO_DATE,TOCAHR,TONUMBER                                |
 | ---- | ------------------------------------------------------------ |
 | 구룹 | SUM,AVG,MIN,MAX,                                             |
-| 문자 | CONCAT('A', '가'),\|\|문자 합체,INSTR(123,3) 인덱스 확인,initcap 초기값 lower,upper,LENGTHB(바이트),LENGTH(글자 수),replace / translate ('this is java','java','oracle')오라클로 변경해줌,substr(대상,4,2)='03' 문자열 자르기 4번째 부터 2개,ltrim 왼쪽 공백제거,rtrim 오른쪽 공백 제거(대상,#)#제거,LPAD |
+| 문자 | CONCAT('A', '가'),\|\|문자 합체,INSTR(123,3) 인덱스 확인,initcap 초기값 lower,upper,LENGTHB(바이트),LENGTH(글자 수),replace / translate ('this is java','java','oracle')오라클로 변경해줌,substr(대상,4,2)='03' 문자열 자르기 4번째 부터 2개 남겨라 ,ltrim 왼쪽 공백제거,rtrim 오른쪽 공백 제거(대상,#)#제거,LPAD |
 | 숫자 | mod(3,3) == 3%3 round(대상,-10(정수)~10(소수))-반올림 trunc  반올림 x |
 | 날짜 | sysdate,systimestamp,add_months,months_between               |
 | 순위 | rownum 별도 row_number,rank,dense_rank //순위 함수()over(partition by 구룹 컴럼 order by 컬럼 desc) |
@@ -394,7 +394,9 @@ set linesize 150;
 
 * **union**  중복 제거// **union all** 중복 생존 위 조건과 아래 조건을 모두 포함 하는 것 **or**
 
-  > * select first_name,department_id,salary from employees where department_id =50 union all select first_name,department_id,salary from employees where salary <= all 5000 order by first_name ;
+  > * select first_name,department_id,salary from employees where department_id =50 
+  > * union all 
+  > * select first_name,department_id,salary from employees where salary <= all 5000 order by first_name ;
 
 * **minus**  위 조건을 포함하고 아래조건이 아닌것 **not**
 
@@ -589,3 +591,41 @@ insert into Student values(1,'홍길동','국문학과' ,'서울','010-1111-1111
 
 insert into Student values(2,'고길동','수학과' ,'인천','010-2222-2222');
 
+
+
+select c.name from city c, country t
+where  t.continent = 'Africa' and c.countrycode =  t.code;
+
+* csv팔일 변환
+
+  ```java
+  set pagesize 0  -----> 컬럼 이름을 쓰지 않는다.
+  set linesize 200 -----> 오른쪽 여백을 200자까지만 놔두고 자른다.
+  set echo off ---------> 컬럼이름, sql문장 빼고 데이터만 export받는다.
+  set termout off ------> 스크립트를 다 실행시켜도 화면상에 아무것도 출력하지 않는다.
+  set trimspool on -----> linesize를 했을때 공백을 좀 줄인다.
+  set feedback off -----> 피드백 문장을 지운다.
+  spool C:\Data\emp_200212.csv ----> C:\Data\에 emp_200212.csv 파일을 만든다.
+  select employee_id||','||last_name||','||to_char(hire_date,'yyyy-mm-dd')||','||salary||','||department_id
+  from employees; ----> 이것을 실행시켜서 만든다.
+  spool off --->끝내기
+  ```
+
+  
+
+* case 문
+
+  ```c
+  SELECT CASE             
+              WHEN A + B > C AND B + C > A AND A + C > B THEN
+                  CASE 
+                      WHEN A = B AND B = C THEN 'Equilateral'
+                      WHEN A = B OR B = C OR A = C THEN 'Isosceles'
+                      ELSE 'Scalene'
+                  END
+              ELSE 'Not A Triangle'
+          END
+  FROM TRIANGLES;
+  ```
+
+  
