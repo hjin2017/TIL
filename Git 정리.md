@@ -6,7 +6,6 @@
 * git remote add origin 주소
 * git status 상태
 * git add . 전부 추가
-* git init 파일기본 셋팅
 * git log 로그
 * git log --oneline 깃 사이트 버전 확인 가능
 * git commit -m '코멘트' 사이트 올리기전에 대기상태
